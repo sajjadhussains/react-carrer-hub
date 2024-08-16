@@ -4,6 +4,9 @@ import { PiSubtitlesLight } from "react-icons/pi";
 import { CiPhone } from "react-icons/ci";
 import { MdOutlineEmail } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { saveJobApplication } from "../../utility/localStorage";
 
 const JobDetails = () => {
   const jobs = useLoaderData();
@@ -20,6 +23,11 @@ const JobDetails = () => {
     contact_information,
   } = job;
   const { phone, email, address } = contact_information;
+  const handleApply = () => {
+    saveJobApplication(idInt);
+
+    // toast("wow");
+  };
   return (
     <div>
       <h1 className="text-3xl my-28 text-center font-extrabold">job details</h1>
@@ -83,11 +91,15 @@ const JobDetails = () => {
               </div>
             </div>
           </div>
-          <button className="w-full text-center bg-[#5590FE] py-4 rounded text-white">
+          <button
+            onClick={handleApply}
+            className="w-full text-center bg-[#5590FE] py-4 rounded text-white"
+          >
             Apply Now
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
